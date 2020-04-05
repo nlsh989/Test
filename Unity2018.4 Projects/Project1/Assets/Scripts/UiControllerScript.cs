@@ -10,9 +10,8 @@ public class UiControllerScript : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnClickedScreen1Button()
     {
-        
+
     }
 }
