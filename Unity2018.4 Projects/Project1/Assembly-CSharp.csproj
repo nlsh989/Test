@@ -62,7 +62,12 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Entity\DataEntity.cs" />
     <Compile Include="Assets\Scripts\Entity\SubtopicEntity.cs" />
+    <Compile Include="Assets\Scripts\InfoHandlerScript.cs" />
+    <Compile Include="Assets\Scripts\ItemHandlerScript.cs" />
+    <Compile Include="Assets\Scripts\Singleton.cs" />
+    <Compile Include="Assets\Scripts\SubItemHandlerScript.cs" />
     <Compile Include="Assets\Scripts\UiControllerScript.cs" />
+    <Compile Include="Assets\Scripts\Utility\SimpleJSON.cs" />
     <Compile Include="Assets\Scripts\WebserviceManagerScript.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/Nilesh/Documents/GitHub/Test/Unity2018.4 Projects/Project1/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>

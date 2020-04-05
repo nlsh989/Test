@@ -3,51 +3,54 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public delegate void ResponseDel(string res);
-
-public class WebserviceManagerScript : MonoBehaviour
+namespace Test
 {
-    //url
-    private readonly string URL = "https://5e6b24f90f70dd001643c248.mockapi.io/v1/demo/math/data";
+    public delegate void ResponseDel(string res);
 
-    private string mJSONResponse = null;
-
-    // Start is called before the first frame update
-    void Start()
+    public class WebserviceManagerScript : Singleton<WebserviceManagerScript>
     {
-        GetData(null);
-    }
+        //url
+        private readonly string URL = "https://5e6b24f90f70dd001643c248.mockapi.io/v1/demo/math/data";
 
-    public void GetData(ResponseDel callback)
-    {
-        if (mJSONResponse == null)
-        {
-            StartCoroutine(GetDataFromServer(callback));
-        }
-        else
-        {
-            callback?.Invoke(mJSONResponse);
-        }
-    }
+        private string mJSONResponse = null;
 
-    private IEnumerator GetDataFromServer(ResponseDel callback)
-    {
-        //create post web request
-        UnityWebRequest webRequest = UnityWebRequest.Get(URL);
-        //calling and wait for response
-        yield return webRequest.SendWebRequest();
-        //check for if any error occurred
-        if (webRequest.isNetworkError || webRequest.isHttpError)
+        // Start is called before the first frame update
+        void Start()
         {
-            Debug.LogError(webRequest.error);
+            GetData(null);
         }
-        else
-        {
-            // Show results as text
-            Debug.Log(webRequest.downloadHandler.text);
-            mJSONResponse = webRequest.downloadHandler.text;
-            callback?.Invoke(webRequest.downloadHandler.text);
-        }
-    }
 
+        public void GetData(ResponseDel callback)
+        {
+            if (mJSONResponse == null)
+            {
+                StartCoroutine(GetDataFromServer(callback));
+            }
+            else
+            {
+                callback?.Invoke(mJSONResponse);
+            }
+        }
+
+        private IEnumerator GetDataFromServer(ResponseDel callback)
+        {
+            //create post web request
+            UnityWebRequest webRequest = UnityWebRequest.Get(URL);
+            //calling and wait for response
+            yield return webRequest.SendWebRequest();
+            //check for if any error occurred
+            if (webRequest.isNetworkError || webRequest.isHttpError)
+            {
+                Debug.LogError(webRequest.error);
+            }
+            else
+            {
+                // Show results as text
+                Debug.Log(webRequest.downloadHandler.text);
+                mJSONResponse = webRequest.downloadHandler.text;
+                callback?.Invoke(webRequest.downloadHandler.text);
+            }
+        }
+
+    }
 }
